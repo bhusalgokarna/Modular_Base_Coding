@@ -6,4 +6,5 @@ openpyxl
 matplotlib
 plotly
 seaborn
+kaleido
 
