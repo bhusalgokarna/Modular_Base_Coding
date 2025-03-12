@@ -2,8 +2,6 @@ import os
 from .file_handler import FileHandler
 from .data_processor import DataProcessor
 
-
-
 class AccidentDataPipeline:
     def __init__(self, path):
         self.path = path

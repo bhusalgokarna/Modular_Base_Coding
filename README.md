@@ -1,5 +1,8 @@
 ## Traffic Accident Analysis in Belgium (2019-2023)
 
+### Overview
+**This project focuses on analyzing traffic accidents in Belgium over the years 2019 to 2023. The data includes various aspects such as the number and severity of accidents, regional and temporal differences, road types, light conditions, and collision types.**
+
 I have used the Belgium open source website (https://statbel.fgov.be/) to download data. I wanted to do analysis not only for 1 year but for last 5 years to see the traffic accident trend by year in Belgium. As latest data i find 2023, I use data from 2019 to 2023 to do this project.
 
 Data  were saved in different formate(.xlsx and .txt), 1st step to read different formates and files data and save in one csv file to make our data reading process easier.
@@ -51,12 +54,11 @@ As you can see from above we didn't lose any  big amount of information we just 
 ### During this process i needed to do following steps:
 ### Rename the columns.
 ### Remove the unnesessory columns.
-### Recheck the data types. and change to them correct data types.
+### Recheck the data types. and change them to the correct data types.
 ### Trim the records.
 ### And feature engineering to the date column
 
-### Overview
-**This project focuses on analyzing traffic accidents in Belgium over the years 2019 to 2023. The data includes various aspects such as the number and severity of accidents, regional and temporal differences, road types, light conditions, and collision types.**
+
 
 ## Data Analysis
 
@@ -155,7 +157,7 @@ Night without Public Lighting: Fewer accidents occur at night without public lig
 
 Night with Public Lighting: A considerable number of accidents happen at night with public lighting, notably in Provincie Antwerpen, Provincie Oost-Vlaanderen, and Brussels.
 
-6. ## Collision Types:
+## Collision Types:
 
 The year 2020 saw a noticeable reduction in accidents across most types, likely due to reduced traffic during the COVID-19 pandemic. However, numbers have since rebounded, underscoring the persistent nature of these issues.
 

@@ -7,4 +7,6 @@ matplotlib
 plotly
 seaborn
 kaleido
+notebook
+nbconvert
 
