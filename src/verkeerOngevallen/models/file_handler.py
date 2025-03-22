@@ -2,7 +2,7 @@ import os
 import sys
 from pathlib import Path
 # Add src directory to sys.path
-src_path = Path(__file__).resolve().parent.parent.parent  # Adjust as per your structure
+src_path = Path(__file__).resolve().parent.parent.parent  
 sys.path.append(str(src_path))
 import pandas as pd
 from verkeerOngevallen.interfaces.read_file import LoadDataProcess

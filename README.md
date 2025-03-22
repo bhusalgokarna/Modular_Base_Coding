@@ -5,9 +5,9 @@
 
 I have used the Belgium open source website (https://statbel.fgov.be/) to download data. I wanted to do analysis not only for 1 year but for last 5 years to see the traffic accident trend by year in Belgium. As latest data i find 2023, I use data from 2019 to 2023 to do this project.
 
-Data  were saved in different formate(.xlsx and .txt), 1st step to read different formates and files data and save in one csv file to make our data reading process easier.
+Data  were saved in different formate(.xlsx and .txt), 1st step to read different formates and files data and save it in one csv file to make our data reading process easier.
 
-To do this step i create a read data pipeline because this will make my code widly flexible to read different kind of formates and sources.
+To do this step i create a read data pipeline because this will make my code widly flexible to read different kind of formates and sources. Check file_handler.py to understand more about code of reading the multiple files.
 
 **Columns of the merged data-frame:**
 
@@ -26,30 +26,29 @@ To do this step i create a read data pipeline because this will make my code wid
        'MS_ACCT_WITH_SLY_INJ']
 
 **35 columns :**
-English, Dutch and French. each language has their own columns for same information, we will keep only one from three. and rename the column name to make more readable, understandable by column name.
+There are columns in different languages (English, Dutch and French). Each language has their own columns for same information, I will keep only one from three. and rename the column name to make more readable, understandable by column name.
 
 **176277 rows :**
 
 **Most of column's dtypes is Object.**
 Missing values in Buid-up area, coll_type, Light Condition, Road-Type and provincie.
 
-After seeing the original data, we need to follow some cleaning and validating steps. Check src/verkeerOngevallen/models/data_processor.py file to see more details about this process. This step is responsible for data cleaning, validating and data transforming. This design promotes Polymorphism, enabling you to interchange implementations easily.
+After seeing the original data, we need to follow some cleaning and validating steps. Check src/verkeerOngevallen/models/data_processor.py file to see more details about this process. This step is responsible for data cleaning, validating, data transforming and printing the basic information about the data. This design promotes Polymorphism, enabling you to interchange implementations easily.
 
-By segregating these responsibilities, we ensure that changes in one area (e.g., adding a new data source) don't inadvertently impact another area
-(e.g., data cleaning logic).
+By segregating these responsibilities, we ensure that changes in one area (e.g., adding a new data source) don't inadvertently impact another area(e.g., data cleaning logic).
 
 **After cleaning our data, now its time to see and go through clean datafram :**
 
 Data cleaning, validating, transforming is the crusial steps to do data analysis. As we can see above clean_df, data is organized, more readable, validated data to do further analysis.
 
-**Columns : 19**
+**Columns : 20**
 
-#### ['Hour', 'DayOfWeek', 'BuiltUpArea', 'CollisionType', 'LightCondition','RoadType', 'Municipality', 'District', 'Province', 'Region','Accident', 'AccidentsWithFatalities', 'AccidentsWithFatalities30Days','AccidentsWithMinorInjuries', 'AccidentsWithSeriousInjuries','AccidentsWithSlightInjuries', 'Year', 'Month', 'Day_of_Month'],
+#### ['Hour', 'DayOfWeek', 'BuiltUpArea', 'CollisionType', 'LightCondition','RoadType', 'Municipality', 'District', 'Province', 'Region','Accident', 'AccidentsWithFatalities', 'AccidentsWithFatalities30Days','AccidentsWithMinorInjuries', 'AccidentsWithSeriousInjuries','AccidentsWithSlightInjuries', 'Year', 'Month', 'Day_of_Month','total_Death'],
 
 
 **rows : 176274**
 
-As you can see from above we didn't lose any  big amount of information we just have clean, validated data.
+As you can see from above we didn't lose any important information that can impact to the anlysis.
 
 ### During this process i needed to do following steps:
 ### Rename the columns.
@@ -171,6 +170,7 @@ The year 2020 saw a noticeable reduction in accidents across most types, likely 
 
 
 
+
 ### Summary of the observations:
 
 1. **Hourly Distribution of Accidents**: Accidents peak during 16:00-19:00 and around 08:00-09:00, likely due to rush hours when people are commuting to and from work and school, leading to higher traffic volumes and more accidents.
@@ -189,6 +189,7 @@ The year 2020 saw a noticeable reduction in accidents across most types, likely 
 
 
 
+
 ### Recommendations
 
 **Urban Road Safety Measures**
@@ -202,6 +203,7 @@ Focus on highways and main roads to reduce accidents, serious injuries, and fata
 
 **Public Awareness Campaigns**
 There are a few campaigns (Bob, Speed) we can see in Belgium, But may be this is not enough? People still do dirink and drive, don't follow the speed limit, respect everyone on the street, Give priority and get priority. This are the thinks public must be aware with and from government side also need to do more controls and awareness campaigns. Increase awareness about safe driving practices, especially in high-risk areas.
+
 
 
 ### Conclusion

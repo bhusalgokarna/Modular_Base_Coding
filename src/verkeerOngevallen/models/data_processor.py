@@ -2,7 +2,7 @@ import os
 import sys
 from pathlib import Path
 # Add src directory to sys.path
-src_path = Path(__file__).resolve().parent.parent.parent  # Adjust as per your structure
+src_path = Path(__file__).resolve().parent.parent.parent 
 sys.path.append(str(src_path))
 import pandas as pd
 from verkeerOngevallen.interfaces.process_file import DataCleaningProcess
@@ -16,12 +16,13 @@ class DataProcessor(DataCleaningProcess):
         self.numeric_cols = ['DT_HOUR', 'MS_ACCT', 'MS_ACCT_WITH_DEAD', 'MS_ACCT_WITH_DEAD_30_DAYS', 
                               'MS_ACCT_WITH_MORY_INJ', 'MS_ACCT_WITH_SERLY_INJ', 'MS_ACCT_WITH_SLY_INJ']
         self.date_col = 'DT_DAY'
-
+        
+    #Implement the validate_data method
     def validate_data(self):
         if self.data is None:
             print("Data is empty")
         else:
-            # Remove the columns that are not useful
+            # Remove the columns that are not useful to analysis of the data
             for col in self.data.columns:
                 if col.endswith("_FR") or col.startswith("CD"):
                     self.data.drop(col, axis=1, inplace=True)
@@ -31,21 +32,25 @@ class DataProcessor(DataCleaningProcess):
 
             # Remove leading/trailing spaces     
             self.data[self.date_col] = self.data[self.date_col].str.strip()  
+            
+            # Change the correct dtypes of the columns to numeric
+            self.data[self.numeric_cols] = self.data[self.numeric_cols].apply(pd.to_numeric, errors='coerce')
 
             # Feature Engineering for the date columns
             self.data['Year'] = self.data[self.date_col].str[:4].astype('Int64', errors='ignore')
             self.data['Month'] = self.data[self.date_col].str[5:7].astype('Int64', errors='ignore')
             self.data['Day_of_Month'] = self.data[self.date_col].str[8:10].astype('Int64', errors='ignore') 
+            self.data['total_Deaths'] = self.data['MS_ACCT_WITH_DEAD'] + self.data['MS_ACCT_WITH_DEAD_30_DAYS']
 
             # Drop the date column
             self.data.drop(self.date_col, axis=1, inplace=True)
 
-            # Change the correct dtypes of the columns to numeric
-            self.data[self.numeric_cols] = self.data[self.numeric_cols].apply(pd.to_numeric, errors='coerce')
+            
 
             # Fill the missing values of province with Brussels
             self.data['TX_PROV_DESCR_NL'] = self.data['TX_PROV_DESCR_NL'].replace(['', ' '], 'Brussels')
             self.data.fillna({'TX_PROV_DESCR_NL': 'Brussels'}, inplace=True)
+            
                
             # Rename the columns
             columns_rename = {
@@ -61,9 +66,11 @@ class DataProcessor(DataCleaningProcess):
             # This loop will rename the columns
             for key, value in columns_rename.items():
                 self.data.rename(columns={key: value}, inplace=True)
+                
             print("Data cleaned successfully") 
             return self.data
-         
+        
+    #Implement the transform_data method   
     def transform_data(self, data, output_path):
         self.output_Path = output_path
         if os.path.exists(self.output_Path):
@@ -71,6 +78,7 @@ class DataProcessor(DataCleaningProcess):
         data.to_csv(self.output_Path, index=False)
         print(f"Data saved successfully at {self.output_Path}")
 
+    #Implement the print_information method
     def print_information(self, data_to_print):
         print("-" * 50)
         print(f"Shape of the data: {data_to_print.shape}\n")
