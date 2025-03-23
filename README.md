@@ -7,7 +7,7 @@ I have used the Belgium open source website (https://statbel.fgov.be/) to downlo
 
 Data  were saved in different formate(.xlsx and .txt), 1st step to read different formates and files data and save it in one csv file to make our data reading process easier.
 
-To do this step i create a read data pipeline because this will make my code widly flexible to read different kind of formates and sources. Check file_handler.py to understand more about code of reading the multiple files.
+To do this step i create a read data pipeline because this will make my code widly flexible to read different kind of formates and sources. Check file_handler.py or dataPipeline to understand more about code of reading the multiple files.
 
 **Columns of the merged data-frame:**
 
@@ -33,7 +33,7 @@ There are columns in different languages (English, Dutch and French). Each langu
 **Most of column's dtypes is Object.**
 Missing values in Buid-up area, coll_type, Light Condition, Road-Type and provincie.
 
-After seeing the original data, we need to follow some cleaning and validating steps. Check src/verkeerOngevallen/models/data_processor.py file to see more details about this process. This step is responsible for data cleaning, validating, data transforming and printing the basic information about the data. This design promotes Polymorphism, enabling you to interchange implementations easily.
+After seeing the original data, we need to follow some cleaning and validating steps. Check src/verkeerOngevallen/models/data_processor.py file or dataPipeline.ipynb notebook file to see more details about this process. This step is responsible for data cleaning, validating, data transforming and printing the basic information about the data. This design promotes Polymorphism, enabling you to interchange implementations easily.
 
 By segregating these responsibilities, we ensure that changes in one area (e.g., adding a new data source) don't inadvertently impact another area(e.g., data cleaning logic).
 
@@ -48,7 +48,7 @@ Data cleaning, validating, transforming is the crusial steps to do data analysis
 
 **rows : 176274**
 
-As you can see from above we didn't lose any important information that can impact to the anlysis.
+As you can see from above result we didn't lose any important information that can impact to the anlysis.
 
 ### During this process i needed to do following steps:
 ### Rename the columns.
