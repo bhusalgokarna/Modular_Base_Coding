@@ -1,0 +1,1 @@
+from .verkeerOngevallen.models.pipeline import AccidentDataPipeline

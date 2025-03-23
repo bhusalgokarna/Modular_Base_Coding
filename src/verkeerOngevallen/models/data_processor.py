@@ -10,6 +10,7 @@ from verkeerOngevallen.interfaces.process_file import DataCleaningProcess
 
 class DataProcessor(DataCleaningProcess):
     def __init__(self, data):
+        
         #self.data = data.copy()
         self.data = data
         self.keep_cols=[]
